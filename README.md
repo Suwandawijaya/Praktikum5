@@ -65,8 +65,6 @@ print("===================================================================")
 
 * Setelah memahami materi saya membuat syntax sebagai berikut untuk memenuhi tugas praktikum module 5 : <br>
 ```python
-from prettytable import PrettyTable
-
 print("===================================================================")
 print("Nama : Suwanda wijaya")
 print("NIM : 312210028")
@@ -74,154 +72,90 @@ print("Kelas : TI.22.B1")
 print("Mata Kuliah : Bahasa Pemrograman")
 print("===================================================================")
 
-baris = []
-x = PrettyTable()
 
+data = {}
 while True:
-    print("[ (L)ihat , (T)ambah, (U)bah, (H)apus, (C)ari, (K)eluar ]")
-    tanya = input("Masukkan Pilihan : ")
-    if tanya == "L":
-        print("==== Daftar Nilai ====")
-        no = 0
-        no += 1
-        x.field_names = ["No", "NIM", " NAMA", "TUGAS", "UTS", "UAS", "AKHIR"]
-        if not baris:
-            x.field_names = ["No", "NIM", " NAMA", "TUGAS", "UTS", "UAS", "AKHIR"]
-            print("Not Data")
-        else:
-            for data in baris:
-                x.add_row([no, data["nim"], data["nama"], data["tugas"], data["uts"], data["uas"], data["akhir"]])
-            print(x)
-    elif tanya == "T":
-        print("Tambah Data ")
-        nim_v = input("NIM : ")
-        nama_v = input("Nama Lengkap : ")
-        uts_v = input("Nilai UTS : ")
-        uas_v = input("Nilai UAS : ")
-        tugas_v = input("Nilai Tugas : ")
-        akhir_v = 0.3 * float(tugas_v) + 0.35 * float(uts_v) + 0.35 * float(uas_v)
-        baris.append({"nim": nim_v, "nama": nama_v, "tugas": tugas_v, "uts": uts_v, "uas": uas_v, "akhir": akhir_v})
-        print()
-        print("==== Daftar Nilai ====")
-        i = 0
-        for data in baris:
-            i += 1
-            x.field_names = ["No", "NIM", " NAMA", "TUGAS", "UTS", "UAS", "AKHIR"]
-            x.add_row([i, data["nim"], data["nama"], data["tugas"], data["uts"], data["uas"], data["akhir"]])
-        print(x)
-    elif tanya == "U":
-        print("Edit File")
-        print("Data siapa yang akan diubah ?")
-        siapa = input("Masukkan NIM Mahasiswa yang akan diubah : ")
+    a = input('\n(T)ambah data, (H)apus data, (U)bah data, (L)ihat data, (C)ari data,(K)eluar  ')
+    if a=="t":
+        print('tambah data mahasiswa')
+        nama=input('masukan nama\t\t: ')
+        nim=input('masukan NIM\t\t: ')
+        nilaiTugas=int(input('masukan nilai tugas\t: '))
+        nilaiUts=int(input('masukan nilai UTS\t: '))
+        nilaiUas=int(input('masukan nilai UAS\t: '))
+        nilaiakhir=(0.30*nilaiTugas)+(0.35*nilaiUts)+(0.35*nilaiUas)
+        data[nama]=nim,nilaiTugas,nilaiUts,nilaiUas,nilaiakhir
+        print('\ndata berhasil ditambahkan')
 
-        print("Data apa yang akan diubah ? : ")
-        mhs = input(" 1. Nama \n 2. Nilai Tugas \n 3. Nilai UTS \n 4. Nilai UAS\n Pilih dengan angka (1/2/3/4) : ")
-        if mhs == "1":
-            ubahnama = input("Silahkan masukan nama yang benar : ")
-            i = 0
-            d = next(item for item in baris if item['nim'] == siapa)
-            d['nama'] = ubahnama
-            x.field_names = ["No", "NIM", " NAMA", "TUGAS", "UTS", "UAS", "AKHIR"]
-            i += 1
-            x.add_row([i, d["nim"], d["nama"], d["tugas"], d["uts"], d["uas"], d["akhir"]])
-            print(x)
-        elif mhs == "2":
-            ubahtugas = input("Masukkan Nilai Tugas yang benar : ")
-            i = 0
-            d = next(item for item in baris if item['nim'] == siapa)
-            d['tugas'] = ubahtugas
-            lihatuts = d['uts']
-            lihatuas = d['uas']
-            lihatakhir = 0.3 * float(ubahtugas) + 0.35 * float(lihatuts) + 0.35 * float(lihatuas)
-            d['akhir'] = lihatakhir
-            x.field_names = ["No", "NIM", " NAMA", "TUGAS", "UTS", "UAS", "AKHIR"]
-            for data in baris:
-                i += 1
-                x.add_row([i, data["nim"], data["nama"], data["tugas"], data["uts"], data["uas"], data["akhir"]])
-            print(x)
-        elif mhs == "3":
-            ubahuts = input("Masukkan Nilai UTS yang benar : ")
-            i = 0
-            d = next(item for item in baris if item['nim'] == siapa)
-            d['uts'] = ubahuts
-            lihattugas = d['tugas']
-            lihatuas = d['uas']
-            lihatakhir = 0.3 * float(lihattugas) + 0.35 * float(ubahuts) + 0.35 * float(lihatuas)
-            d['akhir'] = lihatakhir
-            x.field_names = ["No", "NIM", " NAMA", "TUGAS", "UTS", "UAS", "AKHIR"]
-            for data in baris:
-                i += 1
-                x.add_row([i, data["nim"], data["nama"], data["tugas"], data["uts"], data["uas"], data["akhir"]])
-            print(x)
-        elif mhs == "4":
-            ubahuas = input("Masukkan Nilai UAS yang benar : ")
-            i = 0
-            d = next(item for item in baris if item['nim'] == siapa)
-            d['uas'] = ubahuas
-            lihattugas = d['tugas']
-            lihatuts = d['uts']
-            lihatakhir = 0.3 * float(lihattugas) + 0.35 * float(lihatuts) + 0.35 * float(ubahuas)
-            d['akhir'] = lihatakhir
-            x.field_names = ["No", "NIM", " NAMA", "TUGAS", "UTS", "UAS", "AKHIR"]
-            for data in baris:
-                i += 1
-                x.add_row([i, data["nim"], data["nama"], data["tugas"], data["uts"], data["uas"], data["akhir"]])
-            print(x)
+    elif a=="u":
+        print('ubah data')
+        nama=input('masukan nama: ')
+        if nama in data.keys():
+            nim=input('masukan NIM baru\t: ')
+            nilaiTugas=int(input('masukan nilai tugas\t: '))
+            nilaiUts=int(input('masukan nilai UTS\t: '))
+            nilaiUas=int(input('masukan nilai UAS\t: '))
+            nilaiakhir=(0.30*nilaiTugas)+(0.35*nilaiUts)+(0.35*nilaiUas)
+            data[nama]=nim,nilaiTugas,nilaiUts,nilaiUas,nilaiakhir
+            print('\ndata berhasil diubah')
         else:
-            print("Pilihan Salah")
+            print('data tidak ditemukan')
 
-    elif tanya == "C":
-        print(" ========== Pencarian Data ==========")
-        print(" Pencarian berdasarkan NIM ")
-        carinim = input("Masukkan NIM yang akan dicari : ")
-        xdata = next(item for item in baris if item['nim'] == carinim)
-        print("NIM : ", carinim)
-        print("Nama : ", xdata['nama'])
-        print("Nilai Tugas : ", xdata['tugas'])
-        print("Nilai UTS : ", xdata['uts'])
-        print("Nilai UAS : ", xdata['uas'])
-        print("Nilai Akhir : ", xdata['akhir'])
-    elif tanya == "H":
-        print("Hapus Data Berdasarkan NIM")
-        datahapus = input("Masukkan NIM data yang akan dihapus : ")
-        xhapus = next(item for item in baris if item['nim'] == datahapus)
-        del xhapus['nim']
-        del xhapus['nama']
-        del xhapus['tugas']
-        del xhapus['uts']
-        del xhapus['uas']
-        del xhapus['akhir']
-        print("Data Berhasil Dihapus")
-        no = 0
-        no += 1
-        x.field_names = ["No", "NIM", " NAMA", "TUGAS", "UTS", "UAS", "AKHIR"]
-        if not baris:
-            x.field_names = ["No", "NIM", " NAMA", "TUGAS", "UTS", "UAS", "AKHIR"]
-            print("Not Data")
+    elif a=="h":
+        print('hapus data')
+        nama = input('masukan nama: ')
+        if nama in data.keys():
+            del data[nama]
+            print('data berhasil dihapus')
         else:
-            for data in baris:
-                x.add_row([no, data["nim"], data["nama"], data["tugas"], data["uts"], data["uas"], data["akhir"]])
-            print(x)
+            print('data tidak ditemukan')
+        
 
-    elif tanya == "K":
-        print("Anda Keluar Dari Aplikasi")
+    elif a=='c':
+        print('cari data')
+        nama = input('masukan nama: ')
+        if nama in data.keys():
+            print("\n                   DAFTAR NILAI MAHASISWA                   ")
+            print("==============================================================")
+            print("|     Nama     |    NIM    | Tugas |  UTS  |  UAS  |  Akhir |")
+            print("==============================================================")
+            print("| {0:12s} | {1:9s} | {2:5} | {3:5} | {4:5} | {5:6} |".format(nama, nim, nilaiTugas, nilaiUts, nilaiUas, nilaiakhir)) 
+            print("==============================================================")
+        else:
+            print('data tidak ditemukan')
+
+
+    elif a=='l':
+        if data.items():
+            print("\n                      DAFTAR NILAI MAHASISWA                    ")
+            print("==================================================================")
+            print("| No |     Nama     |    NIM    | Tugas |  UTS  |  UAS  |  Akhir |")
+            print("==================================================================")
+            i = 0
+            for x in data.items():
+                i += 1
+                print("| {6:2} | {0:12s} | {1:9s} | {2:5} | {3:5} | {4:5} | {5:6} |".format(x[0], x[1][0], x[1][1], x[1][2], x[1][3], x[1][4], i))  
+            print("==================================================================")
+        else:
+            print('data tidak ditemukan')
+
+    elif a=='k':
+        print('======terimakasih=====')
         break
     else:
-        print("Anda Memilih Pilihan Yang Salah")
+        print('mohon memasukan pilihan yang benar')
 ```
 * Berikut ini adalah hasil run dari syntax diatas akan diuraikan satu persatu<br>
-* *Lihat data sebelum data ditambahkan*<br>
-![lihat](pict/Lihat1.PNG)<br>
+
 * *Tambah data*<br>
-![tambah](pict/tambah.PNG)<br>
+![tambah](img/tambah.png))<br>
 * *Lihat setelah tambah data*<br>
-![lihat-tambah](pict/Lihat-Tambah.PNG)<br>
+![lihat-tambah](img/lihat.png)<br>
 * *Ubah data, dan pada gambar dibawah adalah hasil dari perubahan data*<br>
-![lihat-ubah](pict/lihat-ubah.PNG)<br>
+![lihat-ubah](img/ubah.png)<br>
 * *Mencari data yang diinputkan*<br>
-![cari-data](pict/cari.PNG)<br>
+![cari-data](img/cari.png)<br>
 * *Menghapus data yang diinputkan*<br>
-![hapus-data](pict/hapus.PNG)<br>
-* *Keluar dari program aplikasi*<br>
-![keluar](pict/keluar.PNG)<br>
+![hapus-data](img/hapus.png)<br>
+
 ### Demikian tugas untuk pertemuan 9 module 5 yang bisa saya sampaikan, Terima kasih...
